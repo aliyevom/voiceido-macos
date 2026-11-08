@@ -4,7 +4,13 @@ A menu-bar app for Mac. Select text on the screen and copy it, or save screensho
 
 This project is not affiliated with the commercial TextSniper app.
 
-## Install
+## Download
+
+The latest universal disk image, for Apple silicon and Intel, is on the [releases](https://github.com/aliyevom/voiceido-macos/releases) page. It runs on macOS 14 and later.
+
+Open the disk image and drag TextSnipper to Applications. The first time, right-click TextSnipper and choose Open, then Open. Allow Screen Recording when macOS asks.
+
+## Install from source
 
 You need a Mac on macOS 14 or newer, plus the Xcode Command Line Tools.
 
@@ -35,7 +41,7 @@ From the menu-bar icon:
 - **Change Shortcut…** — pick another global shortcut for text capture (it must include ⌘, ⌥, or ⌃)
 - **Quit TextSnipper**
 
-The menu-bar icon shows how many screenshots are saved. To have the app ready after a restart, add `~/Applications/TextSnipper.app` in System Settings → General → Login Items.
+The menu shows how many screenshots are saved. To have the app ready after a restart, add `~/Applications/TextSnipper.app` in System Settings → General → Login Items.
 
 ## Rebuild
 

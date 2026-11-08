@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  dmg:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build universal disk image
+        run: chmod +x build.sh && ./build.sh --release
+
+      - name: Upload disk image
+        uses: actions/upload-artifact@v4
+        with:
+          name: TextSnipper-universal
+          path: dist/*.dmg
+          if-no-files-found: error
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          images=(dist/*.dmg)
+          gh release create "$GITHUB_REF_NAME" "${images[@]}" \
+            --title "TextSnipper $GITHUB_REF_NAME" \
+            --notes "$(cat <<EOF
+          Universal app for Apple silicon and Intel Macs. Requires macOS 14 or later.
+
+          1. Download the disk image and open it.
+          2. Drag TextSnipper onto Applications.
+          3. The first time, right-click TextSnipper in Applications and choose Open, then Open.
+          4. Allow Screen Recording when macOS asks, then press Command-Shift-2.
+
+          Command-Shift-1 saves a screenshot into the pool. Command-V pastes the copied text or the saved screenshots. Command-Shift-0 clears the pool.
+          EOF
+          )"
