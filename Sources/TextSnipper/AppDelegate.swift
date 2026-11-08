@@ -81,12 +81,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         false
     }
 
+    private func appIcon(pointSize: CGFloat) -> NSImage? {
+        let image = Bundle.main.url(forResource: "AppIcon", withExtension: "png")
+            .flatMap { NSImage(contentsOf: $0) }
+        image?.isTemplate = false
+        image?.size = NSSize(width: pointSize, height: pointSize)
+        return image
+    }
+
     private func setupMenuBar() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem.button {
-            let image = NSImage(systemSymbolName: "text.viewfinder", accessibilityDescription: "TextSnipper")
-            image?.isTemplate = true
-            button.image = image
+            button.image = appIcon(pointSize: 18)
         }
 
         let menu = NSMenu()

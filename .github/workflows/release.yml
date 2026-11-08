@@ -36,7 +36,7 @@ jobs:
           gh release create "$GITHUB_REF_NAME" "${images[@]}" \
             --title "TextSnipper $GITHUB_REF_NAME" \
             --notes "$(cat <<EOF
-          Universal app for Apple silicon and Intel Macs. Requires macOS 14 or later.
+          Universal app for Apple silicon and Intel Macs. Requires macOS 27 or later.
 
           1. Download the disk image and open it.
           2. Drag TextSnipper onto Applications.

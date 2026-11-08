@@ -8,7 +8,7 @@ if [[ "${1:-}" == "--release" ]]; then
 fi
 
 BUNDLE_ID="local.aliyevom.TextSnipper"
-DEPLOYMENT="14.0"
+DEPLOYMENT="27.0"
 
 pick_sdk() {
   local candidate probe
@@ -119,11 +119,32 @@ sign_app() {
   xattr -cr "$target" || true
 }
 
+install_icon() {
+  local app="$1"
+  local iconset
+  iconset="$(mktemp -d /tmp/textsnipper-icon.XXXXXX)/AppIcon.iconset"
+  mkdir -p "$iconset" "$app/Contents/Resources"
+  sips -z 16 16 Resources/AppIcon.png --out "$iconset/icon_16x16.png" >/dev/null
+  sips -z 32 32 Resources/AppIcon.png --out "$iconset/icon_16x16@2x.png" >/dev/null
+  sips -z 32 32 Resources/AppIcon.png --out "$iconset/icon_32x32.png" >/dev/null
+  sips -z 64 64 Resources/AppIcon.png --out "$iconset/icon_32x32@2x.png" >/dev/null
+  sips -z 128 128 Resources/AppIcon.png --out "$iconset/icon_128x128.png" >/dev/null
+  sips -z 256 256 Resources/AppIcon.png --out "$iconset/icon_128x128@2x.png" >/dev/null
+  sips -z 256 256 Resources/AppIcon.png --out "$iconset/icon_256x256.png" >/dev/null
+  sips -z 512 512 Resources/AppIcon.png --out "$iconset/icon_256x256@2x.png" >/dev/null
+  sips -z 512 512 Resources/AppIcon.png --out "$iconset/icon_512x512.png" >/dev/null
+  cp Resources/AppIcon.png "$iconset/icon_512x512@2x.png"
+  iconutil -c icns "$iconset" -o "$app/Contents/Resources/AppIcon.icns"
+  cp Resources/AppIcon.png "$app/Contents/Resources/AppIcon.png"
+  rm -rf "$(dirname "$iconset")"
+}
+
 APP="dist/TextSnipper.app"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS"
 cp "$MOD/TextSnipper" "$APP/Contents/MacOS/TextSnipper"
 cp Info.plist "$APP/Contents/Info.plist"
+install_icon "$APP"
 
 if [[ "$MODE" == "release" ]]; then
   sign_app "$APP" adhoc

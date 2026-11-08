@@ -6,13 +6,13 @@ This project is not affiliated with the commercial TextSniper app.
 
 ## Download
 
-The latest universal disk image, for Apple silicon and Intel, is on the [releases](https://github.com/aliyevom/voiceido-macos/releases) page. It runs on macOS 14 and later.
+The latest universal disk image, for Apple silicon and Intel, is on the [releases](https://github.com/aliyevom/voiceido-macos/releases) page. It runs on macOS 27 and later.
 
 Open the disk image and drag TextSnipper to Applications. The first time, right-click TextSnipper and choose Open, then Open. Allow Screen Recording when macOS asks.
 
 ## Install from source
 
-You need a Mac on macOS 14 or newer, plus the Xcode Command Line Tools.
+You need a Mac on macOS 27 or newer, plus the Xcode Command Line Tools.
 
 ```bash
 xcode-select --install
