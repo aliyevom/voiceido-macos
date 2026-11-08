@@ -123,12 +123,11 @@
     }
     h1 {
       margin: 0;
+      font-size: clamp(44px, 6.4vw, 80px);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
       animation: rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
-    }
-    h1 img {
-      height: clamp(52px, 8vw, 84px);
-      width: auto;
-      display: block;
     }
     .lede {
       max-width: 18em;
@@ -268,7 +267,7 @@
       </div>
       <div class="stage-copy">
         <img class="mark" src="icon.png" alt="">
-        <h1><img src="textsnipper.png" alt="TextSnipper"></h1>
+        <h1>TextSnipper</h1>
         <p class="lede">The words on your screen, on the clipboard. The pictures, kept until you paste them.</p>
         <div class="actions">
           <a class="download" href="https://github.com/aliyevom/voiceido-macos/releases/download/v2026.1/TextSnipper-2026.1-universal.dmg">Download</a>
